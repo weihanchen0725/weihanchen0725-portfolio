@@ -1,0 +1,13 @@
+// Map SCSS variables to the CSS variables
+// This bridges the gap between Sass and Native CSS
+$color-bg: var(--bg-color);
+$color-surface: var(--surface-color);
+$color-text: var(--text-color);
+$color-accent: var(--accent-color);
+$color-secondary-action: var(--secondary-action-color);
+$color-danger: var(--danger-color);
+
+// Static values (Things that don't change with themes)
+$z-index-modal: 1000;
+$z-index-nav: 900;
+$mobile-breakpoint: 768px;

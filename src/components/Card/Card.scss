@@ -1,0 +1,67 @@
+@use '../../lib/styles/variables';
+
+.project-card {
+    position: relative;
+    background-color: variables.$color-surface; /* Kept for readability over background */
+    border: 3px solid variables.$color-text;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem; /* Spacing for the shadow offset */
+
+    /* The "Shadow" Box - User requested accent border */
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: 3px solid variables.$color-accent;
+        transform: translate(8px, 8px);
+        z-index: -1;
+        transition: transform 0.3s ease;
+        /* Optional: User's snippet had no background, implies transparent. 
+           If you want it valid over other content, keeping transparent is fine. */
+    }
+
+    /* Hover Effect */
+    &:hover {
+        transform: translate(4px, 4px);
+        
+        &::after {
+            transform: translate(4px, 4px);
+        }
+    }
+
+    /* Header Section */
+    &-header {
+        padding: 1.5rem;
+        border-bottom: 3px solid variables.$color-text;
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Description text */
+        p, .description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-family: monospace;
+        }
+    }
+
+    /* Body/Content Section */
+    &-body {
+        padding: 1.5rem;
+    }
+
+    /* Footer Section */
+    &-footer {
+        padding: 1rem 1.5rem;
+        border-top: 3px solid variables.$color-text;
+        background-color: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}
