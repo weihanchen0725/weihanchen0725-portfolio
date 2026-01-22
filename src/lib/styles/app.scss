@@ -1,8 +1,6 @@
-@use 'reset'; // or @tailwind base; if using tailwind
-@use 'theme'; // Loads the :root variables
-@use 'variables'; // Loads the SCSS vars
-@import 'tailwindcss';
-@import 'tailwindcss/utilities';
+@use 'reset';
+@use 'theme';
+@use 'variables';
 
 // Global Styles
 body {
