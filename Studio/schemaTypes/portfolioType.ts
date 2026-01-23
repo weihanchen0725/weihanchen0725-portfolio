@@ -28,19 +28,6 @@ export const portfolioType = defineType({
       fieldset: 'meta'
     }),
     defineField({
-      name: 'heroImage',
-      title: 'Hero/Social Image (1200x630)',
-      type: 'image',
-      options: {hotspot: true},
-      fieldset: 'meta'
-    }),
-    defineField({
-      name: 'profileImage',
-      title: 'Profile Photo',
-      type: 'image',
-      fieldset: 'social'
-    }),
-    defineField({
       name: 'resumeFile',
       title: 'Resume PDF',
       type: 'file',
@@ -49,6 +36,12 @@ export const portfolioType = defineType({
         if (!item?.asset?._ref?.includes('application/pdf')) return 'PDF only'
         return true
       })
+    }),
+    defineField({
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+      fieldset: 'social'
     }),
     defineField({
       name: 'linkedinUrl',

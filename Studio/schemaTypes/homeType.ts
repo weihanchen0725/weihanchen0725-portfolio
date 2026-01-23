@@ -1,5 +1,9 @@
-import {defineField, defineType} from 'sanity'
-import {portfolioType} from './portfolioType'  // Remove unused Rule
+import {defineArrayMember, defineField, defineType} from 'sanity'
+import {portfolioType} from './portfolioType'  
+import {skillGroupType} from './skillGroupType'
+import { projectType } from './projectType'
+import { experienceType } from './experienceType'
+import { favoriteSkillType } from './favoriteSkillType'
 
 export const homeType = defineType({
   name: 'home',
@@ -18,50 +22,73 @@ export const homeType = defineType({
       fieldset: 'seo'
     }),
     defineField({
+      name: 'isOpenToWork',
+      title: 'Open to Work',
+      type: 'boolean',
+      fieldset: 'content'
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: {source: 'seo.metaTitle', maxLength: 96},
       fieldset: 'seo',
-      validation: (rule) => rule.required()
     }),
     defineField({
       name: 'title',
-      title: 'Hero Title',
+      title: 'Title',
       type: 'string',
       fieldset: 'content',
-      validation: (rule) => rule.required()
     }),
     defineField({
-      name: 'header',
-      title: 'Header',
-      type: 'array',
-      of: [{type: 'block'}, {type: 'image'}],
-      fieldset: 'content'
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'string',
+      fieldset: 'content',
     }),
     defineField({
-      name: 'heroImage',
-      title: 'Hero Image',
-      type: 'image',
-      options: {hotspot: true},
-      fields: [{name: 'alt', type: 'string', title: 'Alt', validation: (rule) => rule.required()}],
-      fieldset: 'content'
+      name: 'description',
+      title: 'Description',
+      type: 'string',
+      fieldset: 'content',
     }),
     defineField({
       name: 'footer',
       title: 'Footer',
+      type: 'string',
+      fieldset: 'content',
+    }),
+    // Projects
+    defineField({
+      name: 'projects',
+      title: 'Projects',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [defineArrayMember(projectType)],
       fieldset: 'content'
     }),
-    // Portfolio-focused
+    // Skills
     defineField({
-      name: 'skills',
-      title: 'Skills',
+      name: 'skillGroups',
+      title: 'SkillGroups',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [defineArrayMember(skillGroupType)],
       fieldset: 'content',
-      validation: (rule) => rule.max(12)
+    }),
+    // Experience
+    defineField({
+      name: 'experience',
+      title: 'Experience',
+      type: 'array',
+      of: [defineArrayMember(experienceType)],
+      fieldset: 'content',
+    }),
+    // Favorite Skills
+    defineField({
+      name: 'favoriteSkills',
+      title: 'Favorite Skills',
+      type: 'array',
+      of: [defineArrayMember(favoriteSkillType)],
+      fieldset: 'content',
     }),
     // Temp comment: defineField({name: 'featuredProjects', type: 'array', of: [{type: 'reference', to: [{type: 'project'}]}], fieldset: 'content'}) // Create project.ts first
   ],
