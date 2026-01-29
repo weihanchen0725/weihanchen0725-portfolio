@@ -45,7 +45,7 @@
   &.primary {
     color: variables.$color-text;
     background-color: variables.$color-accent;
-    border-color: variables.$color-accent;
+    border-color: variables.$color-text;
   }
   &.secondary {
     color: variables.$color-secondary-action;

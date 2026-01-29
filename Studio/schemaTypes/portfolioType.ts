@@ -32,8 +32,13 @@ export const portfolioType = defineType({
       title: 'Resume PDF',
       type: 'file',
       fieldset: 'social',
+      options: {
+        accept: 'application/pdf'
+      },
       validation: (rule) => rule.custom((item: any) => {
-        if (!item?.asset?._ref?.includes('application/pdf')) return 'PDF only'
+        if (item?.asset?._ref && !item.asset._ref.endsWith('-pdf')) {
+          return 'PDF only'
+        }
         return true
       })
     }),

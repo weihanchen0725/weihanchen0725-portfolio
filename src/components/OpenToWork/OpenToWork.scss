@@ -1,0 +1,49 @@
+@use '../../lib/styles/variables';
+
+@keyframes pulse-badge-open {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(variables.$color-accent, 0.12);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+@keyframes pulse-badge-closed {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(variables.$color-danger, 0.12);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+.status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      color: variables.$color-text;
+      border-radius: 999rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 1.125rem;
+      letter-spacing: 0.05em;
+      animation: pulse-badge 2s infinite;
+
+        &.open {
+            background: variables.$color-accent;
+            animation-name: pulse-badge-open;
+        }
+        &.closed {
+            background: variables.$color-danger;
+            animation-name: pulse-badge-closed;
+        }
+}
