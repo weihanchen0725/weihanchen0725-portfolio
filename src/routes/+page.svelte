@@ -20,34 +20,34 @@
 
 <div class="root-page home-page">
 	<div class="background-pattern"></div>
-	<div class="max-w-4xl mx-auto space-y-12">
+	<div class="content-container">
 		<!-- Header Section -->
 		<section class="header-section text-center space-y-4">
-			<div>
+			<div class="open-to-work-section">
 				<OpenToWork isOpenToWork={profile?.isOpenToWork} />
 			</div>
-			<div>
-				<h1 class="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">
+			<div class="header-text-section">
+				<h1 class="header-text-title">
 					{profile?.title}
 				</h1>
-				<p class="text-lg text-gray-600 dark:text-gray-400">
+				<p class="header-text-subtitle">
 					{profile?.subtitle}
 				</p>
-				<p>{profile?.description}</p>
+				<p class="header-text-description">
+					{profile?.description}
+				</p>
 			</div>
 			<div class="header-button-section">
 				<Button size="md" variant="primary" on:click={handlePrimaryClick}>See My Work</Button>
 				<Button size="md" variant="secondary" on:click={handleSecondaryClick}>Get In Touch</Button>
 			</div>
-			<div>
+			<div class="header-skills-section">
 				{#if profile?.favoriteSkills}
-					<div>
-						{#each profile.favoriteSkills as skill}
-						{#if skill?.favorite}
-							<FavoriteSkills skill={skill.skill} />
-						{/if}
-						{/each}
-					</div>
+				{#each profile.favoriteSkills as skill}
+				{#if skill?.favorite}
+				<FavoriteSkills skill={skill.skill} />
+				{/if}
+				{/each}
 				{/if}
 			</div>
 		</section>
