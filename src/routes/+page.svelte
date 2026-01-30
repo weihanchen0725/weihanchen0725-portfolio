@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { Button, Card, OpenToWork, FavoriteSkills } from '../components';
 	import type { PageData } from './$types';
+	import '../lib/styles/home.scss';
+	import type ProfileType from '$lib/types/ProfileType';
 
 	export let data: PageData;
+	const profile:ProfileType = data?.portfolio;
 	
-
 	const handlePrimaryClick = () => {
 		alert('Primary button clicked!');
 	};
@@ -13,35 +15,37 @@
 		console.log('Secondary button clicked');
 	};
 
-	console.log(data?.portfolio[0]);
+	console.log('data', data);
 </script>
 
-<div class="min-h-screen dark:bg-gray-900 p-8">
+<div class="root-page home-page">
 	<div class="background-pattern"></div>
 	<div class="max-w-4xl mx-auto space-y-12">
 		<!-- Header Section -->
-		<section class="text-center space-y-4">
+		<section class="header-section text-center space-y-4">
 			<div>
-				<OpenToWork isOpenToWork={data?.portfolio[0]?.isOpenToWork} />
+				<OpenToWork isOpenToWork={profile?.isOpenToWork} />
 			</div>
 			<div>
 				<h1 class="text-4xl font-extrabold text-gray-900 dark:text-white sm:text-5xl">
-					{data?.portfolio[0]?.title}
+					{profile?.title}
 				</h1>
 				<p class="text-lg text-gray-600 dark:text-gray-400">
-					{data?.portfolio[0]?.subtitle}
+					{profile?.subtitle}
 				</p>
-				<p>{data?.portfolio[0]?.description}</p>
+				<p>{profile?.description}</p>
+			</div>
+			<div class="header-button-section">
+				<Button size="md" variant="primary" on:click={handlePrimaryClick}>See My Work</Button>
+				<Button size="md" variant="secondary" on:click={handleSecondaryClick}>Get In Touch</Button>
 			</div>
 			<div>
-				<Button size="md" variant="primary" onclick={handlePrimaryClick}>See My Work</Button>
-				<Button size="md" variant="secondary" onclick={handleSecondaryClick}>Get In Touch</Button>
-			</div>
-			<div>
-				{#if data?.portfolio[0]?.favoriteSkills}
+				{#if profile?.favoriteSkills}
 					<div>
-						{#each data.portfolio[0].favoriteSkills as skill}
-						<FavoriteSkills skill={skill} />
+						{#each profile.favoriteSkills as skill}
+						{#if skill?.favorite}
+							<FavoriteSkills skill={skill.skill} />
+						{/if}
 						{/each}
 					</div>
 				{/if}

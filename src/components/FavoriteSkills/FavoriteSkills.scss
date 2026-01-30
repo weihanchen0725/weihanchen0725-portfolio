@@ -1,2 +1,24 @@
 @use '../../lib/styles/variables';
+@use '../../lib/styles/animation';
 
+.skill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: variables.$color-bg;
+    border: 2px solid variables.$color-text;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+
+    &.float{
+        animation: float 3s ease-in-out infinite;
+    }
+
+    &:hover{
+        background: variables.$color-accent;
+        color: variables.$color-bg;
+    }
+}

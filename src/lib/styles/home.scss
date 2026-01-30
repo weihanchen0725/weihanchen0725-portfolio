@@ -1,0 +1,8 @@
+@use 'variables';
+@use 'animation';
+@use 'mixins' as *;
+
+.root-page.home-page {
+    position: relative;
+    min-height: 100vh;
+}

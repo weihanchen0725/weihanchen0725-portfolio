@@ -1,0 +1,21 @@
+@use './variables';
+
+@keyframes slide {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+@keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 0 var(--accent-color); }
+    50% { box-shadow: 0 0 0 8px transparent; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
