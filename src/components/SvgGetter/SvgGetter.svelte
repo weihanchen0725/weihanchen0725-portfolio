@@ -1,4 +1,5 @@
 <script lang="ts">
+    import './SvgGetter.scss'
     import { onMount } from 'svelte';
     export let url: string = '';
 	export let className: string = '';
@@ -18,9 +19,9 @@
 	});
 </script>
 {#if svgContent}
-	<span class="{className}">
+	<span class="{className} svg-icon" >
 		{@html svgContent}
 	</span>
 {:else}
-    <div class="{className}"></div>
+    <div class="{className} svg-icon"></div>
 {/if}

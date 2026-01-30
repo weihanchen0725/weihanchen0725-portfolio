@@ -1,0 +1,13 @@
+@use '../../lib/styles/variables';
+
+.svg-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: variables.$color-text;
+    fill: currentColor;
+
+    img, svg {
+        width: 100%;
+        height: 100%;
+    }
+}
