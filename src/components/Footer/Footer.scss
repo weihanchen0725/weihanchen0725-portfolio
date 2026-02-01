@@ -1,0 +1,10 @@
+@use '../../lib/styles/variables';
+
+.footer{
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0.9rem;
+    color: variables.$color-text-secondary;
+}
