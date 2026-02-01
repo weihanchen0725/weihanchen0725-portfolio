@@ -1,0 +1,79 @@
+@use '../../lib/styles/variables';
+
+.experience{
+    margin-bottom: 2rem;
+
+    &-header{
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    &-card{
+        padding: 1rem;
+        border: 0px none transparent;
+        background-color: transparent;
+        position: relative;
+        
+        &::after{
+            border: 0px none transparent;
+            border-radius: 0px;
+            fill: transparent;
+            display: none;
+        }
+    }
+
+    &-dates-badge{
+        display: inline-block;
+        background-color: variables.$color-accent;
+        color: variables.$color-surface;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+
+        &::before{
+            content: "📅";
+            margin-right: 0.25rem;
+        }
+    }
+
+    &-content{
+        
+        & .job-title{
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        & .company-info{
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: variables.$color-text-secondary;
+
+            &::before{
+                content: "🏢";
+                margin-right: 0.25rem;
+            }
+            & .company-location{
+                &::before{
+                    content: "📍";
+                    margin-right: 0.25rem;
+                }
+            }
+
+       }
+       
+
+        & .description{
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: variables.$color-text;
+        }
+    }
+}

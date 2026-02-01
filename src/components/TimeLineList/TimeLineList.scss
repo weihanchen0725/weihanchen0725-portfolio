@@ -1,0 +1,36 @@
+@use '../../lib/styles/variables';
+
+.timeline-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    &::before{
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        bottom: 0;
+        width: 0.25rem;
+        background-color: variables.$color-accent;
+    }
+
+    & .timeline-item{
+        position: relative;
+        margin-left: 2.25rem;
+        margin-bottom: 2rem;
+
+        &::before{
+            content: '';
+            position: absolute;
+            left: -2.125rem;
+            top: 0rem;
+            width: 2rem;
+            height: 2rem;
+            background-color: variables.$color-accent;
+            border: 0.25rem solid variables.$color-surface-secondary;
+            border-radius: 50%;
+        }
+    }
+}

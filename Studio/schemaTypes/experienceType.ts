@@ -39,6 +39,11 @@ export const experienceType = defineType({
             title: 'End Date',
             type: 'date',
         }),
+        defineField({
+            name: 'order',
+            title: 'Order',
+            type: 'number',
+        }),
     ],
     preview: {
         select: {

@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { Button, Card, OpenToWork, FavoriteSkills } from '../components';
+	import { Button, Card, OpenToWork, FavoriteSkills, Experience, TimeLineList } from '../components';
 	import type { PageData } from './$types';
 	import '../lib/styles/home.scss';
-	import type ProfileType from '$lib/types/ProfileType';
+	import type { ProfileType } from '$lib/types/ProfileType';
 
 	export let data: PageData;
+
+	// Extract profile data
 	const profile:ProfileType = data?.portfolio;
 	
 	const handlePrimaryClick = () => {
@@ -15,14 +17,19 @@
 		console.log('Secondary button clicked');
 	};
 
-	console.log('data', data);
+	// Sort experience by order field
+	data.portfolio.experience.sort((a: { order?: number }, b: { order?: number }) => {
+		return (a.order ?? 0) - (b.order ?? 0);
+	});		
+
+	console.log('data', data.portfolio.experience);
 </script>
 
 <div class="root-page home-page">
 	<div class="background-pattern"></div>
 	<div class="content-container">
 		<!-- Header Section -->
-		<section class="header-section text-center space-y-4">
+		<section class="header-section">
 			<div class="open-to-work-section">
 				<OpenToWork isOpenToWork={profile?.isOpenToWork} />
 			</div>
@@ -43,9 +50,9 @@
 			</div>
 			<div class="header-skills-section">
 				{#if profile?.favoriteSkills}
-				{#each profile.favoriteSkills as skill}
+				{#each profile.favoriteSkills as skill, index}
 				{#if skill?.favorite}
-				<FavoriteSkills skill={skill.skill} />
+				<FavoriteSkills skill={skill.skill} index={index} />
 				{/if}
 				{/each}
 				{/if}
@@ -54,9 +61,10 @@
 
 
 		<!-- Cards Section -->
-		<section class="space-y-6">
-			<h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 border-b pb-2">Cards</h2>
+		<section>
+			<h2>Featured Work</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				
 				<!-- Card 1: Basic -->
 				<Card title="Project Alpha" description="A revolutionary new initiative.">
 					<p class="text-gray-600 dark:text-gray-300">
@@ -96,7 +104,19 @@
 						<Button variant="primary" class="w-full">Subscribe</Button>
 					{/snippet}
 				</Card>
+
+				
 			</div>
+		</section>
+		<section class="experience-section">
+			<h2 class="section-title">Experience</h2>
+			<TimeLineList>
+				{#each profile?.experience as exp}
+					<li class="timeline-item">
+						<Experience experience={exp} />
+					</li>
+				{/each}
+			</TimeLineList>
 		</section>
 	</div>
 </div>
