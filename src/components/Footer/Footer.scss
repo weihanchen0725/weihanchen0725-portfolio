@@ -7,4 +7,39 @@
     align-items: center;
     font-size: 0.9rem;
     color: variables.$color-text-secondary;
+
+    &-border{
+        position: relative;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        width: 100%;
+        overflow: visible;
+
+        /* textured band behind the visible stripe (subtle noise/diagonal) */
+        &::before{
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 1rem;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 8px);
+            opacity: 0.06; /* much subtler */
+            pointer-events: none;
+            z-index: 1;
+            transform: translateY(-2px);
+        }
+
+        /* visible solid stripe on the border (weaker accent, no glow) */
+        &::after{
+            content: "";
+            position: absolute;
+            inset: 0;
+            height: 6px;
+            background: variables.$color-accent; /* solid accent color */
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.75; /* weaken color */
+        }
+    }
 }
