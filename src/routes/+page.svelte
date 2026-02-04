@@ -9,6 +9,13 @@
 	// Extract profile data
 	const profile:ProfileType = data?.portfolio;
 	
+	// Helper to resolve a reference object to the actual Skill object from profile.skills
+	const getSkillFromRef = (ref: any) => {
+		if (!ref) return undefined;
+		const refId = (ref._ref ?? ref);
+		return (profile as any)?.skills?.find((s: any) => s._id === refId || s.id === refId);
+	};
+
 	const handlePrimaryClick = () => {
 		alert('Primary button clicked!');
 	};
@@ -52,7 +59,9 @@
 				{#if profile?.favoriteSkills}
 				{#each profile.favoriteSkills as skill, index}
 				{#if skill?.favorite}
-				<FavoriteSkills skill={skill.skill} index={index} />
+				{#if getSkillFromRef(skill?.skill)}
+				<FavoriteSkills skill={getSkillFromRef(skill?.skill)} index={index} />
+				{/if}
 				{/if}
 				{/each}
 				{/if}
@@ -60,52 +69,21 @@
 		</section>
 
 
-		<!-- Cards Section -->
-		<section>
-			<h2>Featured Work</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				
-				<!-- Card 1: Basic -->
-				<Card title="Project Alpha" description="A revolutionary new initiative.">
-					<p class="text-gray-600 dark:text-gray-300">
-						This projects aims to solve complex problems with simple solutions. It leverages the
-						power of Svelte 5 runes.
-					</p>
-					{#snippet footer()}
-						<div class="flex justify-end gap-2">
-							<Button variant="ghost" size="sm">Learn More</Button>
-							<Button variant="primary" size="sm">Join Now</Button>
-						</div>
-					{/snippet}
-				</Card>
-
-				<!-- Card 2: Custom Content -->
-				<Card>
-					{#snippet title()}
-						<span
-							class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600"
-						>
-							Premium Plan
-						</span>
-					{/snippet}
-
-					<div class="space-y-4">
-						<div class="text-4xl font-bold text-gray-900 dark:text-white">
-							$29<span class="text-lg text-gray-500 font-normal">/mo</span>
-						</div>
-						<ul class="space-y-2 text-gray-600 dark:text-gray-300">
-							<li class="flex items-center">✓ Unlimited Access</li>
-							<li class="flex items-center">✓ Priority Support</li>
-							<li class="flex items-center">✓ Advanced Analytics</li>
-						</ul>
-					</div>
-
-					{#snippet footer()}
-						<Button variant="primary" class="w-full">Subscribe</Button>
-					{/snippet}
-				</Card>
-
-				
+		<!-- Projects Section -->
+		<section class="project project-section">
+			<h2 class="section-title">Featured Work</h2>
+			<div class="section-content">
+				{#each profile?.projects as project}
+					<Card class="project-card" title={project.title} description={project.description}>
+						{#snippet footer()}
+							<div class="project-card-footer-content">
+								<a href={project.url} target="_blank" rel="noopener noreferrer">
+									<Button class="project-button" size="sm">View Project</Button>
+								</a>
+							</div>
+						{/snippet}
+					</Card>
+				{/each}
 			</div>
 		</section>
 		<section class="experience-section">

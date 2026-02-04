@@ -4,6 +4,13 @@ import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: '@use "$lib/styles/mixins" as *;'
+			}
+		}
+	},
 
 	test: {
 		expect: { requireAssertions: true },

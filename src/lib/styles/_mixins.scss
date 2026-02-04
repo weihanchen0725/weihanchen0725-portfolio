@@ -1,38 +1,15 @@
 // Responsive helper mixins
-@use 'variables' as var;
-
-$breakpoints: (
-  sm: 600px,
-  md: 900px,
-  lg: 1200px,
-);
+@use 'sass:map';
+@use 'variables' as variables;
+$breakpoints: variables.$breakpoints;
 
 @mixin respond-to($size) {
-  // allow both quoted and unquoted keys
-  $is-sm: ($size == sm) or ($size == 'sm');
-  $is-md: ($size == md) or ($size == 'md');
-  $is-lg: ($size == lg) or ($size == 'lg');
-
-  @if $is-sm {
-    $bp: map-get($breakpoints, sm);
-    @media (max-width: $bp) {
+  $bp: map.get($breakpoints, $size);
+  @if $bp {
+    @media (min-width: $bp) {  // Mobile-first standard
       @content;
     }
-  }
-  @else if $is-md {
-    $bp: map-get($breakpoints, md);
-    @media (min-width: $bp) {
-      @content;
-    }
-  }
-  @else if $is-lg {
-    $bp: map-get($breakpoints, lg);
-    @media (min-width: $bp) {
-      @content;
-    }
-  }
-  @else {
-    @warn "Unknown breakpoint `#{$size}` supplied to respond-to(); expected sm, md, or lg.`";
-    @content;
+  } @else {
+    @warn "Unknown breakpoint `#{$size}`";
   }
 }

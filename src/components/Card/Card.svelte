@@ -10,7 +10,7 @@
 		class: className = '',
 		...rest
 	}: {
-		children: Snippet;
+		children?: Snippet;
 		title?: Snippet | string;
 		description?: Snippet | string;
 		footer?: Snippet;
@@ -47,7 +47,9 @@
 	{/if}
 
 	<div class="project-card-body" data-testid="card-body">
-		{@render children()}
+		{#if children}
+			{@render children()}
+		{/if}
 	</div>
 
 	{#if footer}
