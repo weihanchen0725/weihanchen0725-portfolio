@@ -51,7 +51,7 @@
 <button
 	{type}
 	class="{baseStyles} {variants[variant]} {sizes[size]} {className}"
-	{onclick}
+	onclick={onclick}
 	{disabled}
 	{...rest}
 >

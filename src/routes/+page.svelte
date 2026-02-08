@@ -8,6 +8,10 @@
 
 	// Extract profile data
 	const profile:ProfileType = data?.portfolio;
+
+	//
+	let projectSection: HTMLElement;
+	let descriptionSection: HTMLElement;
 	
 	// Helper to resolve a reference object to the actual Skill object from profile.skills
 	const getSkillFromRef = (ref: any) => {
@@ -16,12 +20,13 @@
 		return (profile as any)?.skills?.find((s: any) => s._id === refId || s.id === refId);
 	};
 
-	const handlePrimaryClick = () => {
-		alert('Primary button clicked!');
-	};
-
-	const handleSecondaryClick = () => {
-		console.log('Secondary button clicked');
+	// Scroll to the projects section
+	const handleButtonOnClick = (mode: 'projects' | 'description') => {
+		if (mode === 'projects') {
+			projectSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		} else if (mode === 'description') {
+			descriptionSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
 	};
 
 	// Sort experience by order field
@@ -29,7 +34,6 @@
 		return (a.order ?? 0) - (b.order ?? 0);
 	});		
 
-	console.log('data', data.portfolio.experience);
 </script>
 
 <div class="root-page home-page">
@@ -52,8 +56,8 @@
 				</p>
 			</div>
 			<div class="header-button-section">
-				<Button size="md" variant="primary" on:click={handlePrimaryClick}>See My Work</Button>
-				<Button size="md" variant="secondary" on:click={handleSecondaryClick}>Get In Touch</Button>
+				<Button size="md" variant="primary" onclick={() => handleButtonOnClick('projects')}>My Work</Button>
+				<Button size="md" variant="secondary" onclick={() => handleButtonOnClick('description')}>My Experience</Button>
 			</div>
 			<div class="header-skills-section">
 				{#if profile?.favoriteSkills}
@@ -70,7 +74,7 @@
 
 
 		<!-- Projects Section -->
-		<section class="project project-section">
+		<section bind:this={projectSection} class="project project-section" >
 			<h2 class="section-title">Featured Work</h2>
 			<div class="section-content">
 				{#each profile?.projects as project}
@@ -86,7 +90,7 @@
 				{/each}
 			</div>
 		</section>
-		<section class="experience-section">
+		<section bind:this={descriptionSection} class="experience-section">
 			<h2 class="section-title">Experience</h2>
 			<TimeLineList>
 				{#each profile?.experience as exp}
