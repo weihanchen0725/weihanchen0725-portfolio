@@ -27,7 +27,6 @@
 		} else if (mode === 'description') {
 			descriptionSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 		}
-		console.log(mode, "button clicked");
 	};
 
 	// Sort experience by order field
