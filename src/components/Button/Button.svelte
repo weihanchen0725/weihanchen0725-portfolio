@@ -52,7 +52,6 @@
 	{type}
 	class="{baseStyles} {variants[variant]} {sizes[size]} {className}"
 	onclick={onclick}
-	{disabled}
 	{...rest}
 >
 	{@render children()}
